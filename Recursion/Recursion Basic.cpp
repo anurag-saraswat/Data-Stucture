@@ -7,8 +7,6 @@ void fun_reverse(int n) {
 		cout << n << "\t";
 		fun_reverse(n - 1);
 	}
-
-
 }
 
 void fun_straight(int n) {
@@ -17,9 +15,7 @@ void fun_straight(int n) {
 		fun_straight(n - 1);
 		cout << n << "\t";
 	}
-
 }
-
 
 int main() {
 	fun_reverse(5);
