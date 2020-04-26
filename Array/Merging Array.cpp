@@ -25,7 +25,6 @@ struct Array * merge(struct Array arr1, struct Array arr2) {
 	arr->length = arr1.length + arr2.length ;
 	arr->size = 20;
 
-
 	while ( (r < arr1.length) and (l < arr2.length) ) {
 		if (arr1.a[r] < arr2.a[l]) {
 			arr->a[k++] = arr1.a[r++];
