@@ -6,21 +6,6 @@ struct Node {
 	struct Node *next;
 }*head = NULL;
 
-void Display();
-void RecDisplay();
-void CountNode();
-void Create(struct Node);
-void SumOfElement();
-void Delete(int key);
-
-
-void RecDisplay(struct Node *temp) {
-
-	if (temp != NULL) {
-		cout << temp->key << "->";
-		RecDisplay(temp->next);
-	}
-}
 
 void Display() {
 
@@ -60,7 +45,6 @@ void Create(int *arr , int size) {
 
 void Delete(int key) {
 
-	cout << "list after deletion: ";
 	struct Node *temp = head;
 	struct Node *prev = NULL;
 	while (temp->key != key) {
@@ -70,52 +54,47 @@ void Delete(int key) {
 
 	if ( prev == NULL) {
 		head = temp->next;
-		free(temp);
-		Display();
+		//free(temp);
 		return;
 	}
 
 	else {
 		prev->next = temp->next;
-		Display();
 		return;
 	}
 }
 
-void CountNode() {
-	struct Node *temp = head;
-	int count = 0;
-	while (temp != NULL) {
-		count++;
-		temp = temp->next;
+void DeleteDuplicte() {
+	struct Node *temp1 = head;
+	struct Node *temp2 = NULL;
+
+
+	while (temp1 != NULL) {
+
+		int data = temp1->key;
+		temp2 = temp1->next;
+
+		while (temp2 != NULL) {
+
+			if (temp2->key == data) {
+				Delete(data);
+			}
+			temp2 = temp2->next;
+		}
+
+		temp1 = temp1->next;
 	}
-	cout << "No. of Node in list are: " << count << endl;;
-}
-
-void SumOfElement() {
-	struct Node *temp = head;
-	int sum = 0;
-
-	while (temp != NULL) {
-		sum = sum + (temp->key);
-		temp = temp->next;
-	}
-
-	cout << "Sum Of Elements of list: " << sum << endl;
 }
 
 int main() {
 
 	int size = 10;
-	int arr[] = {2, 4, 8, 16, 32, 64, 128, 256, 512, 1024};
+	int arr[] = {1, 2, 3, 1, 3, 5, 6, 5, 7, 7};
 
 	Create(arr, size);
 	Display();
-	//RecDisplay(head);
-	CountNode();
-	SumOfElement();
-	Delete(32);
+	DeleteDuplicte();
+	Display();
 
 	return 0;
-
 }
