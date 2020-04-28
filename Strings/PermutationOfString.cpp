@@ -22,11 +22,10 @@ void permute(char S[], int k) {
 			}
 		}
 	}
-
-
 }
 
 int main() {
+
 	char s[] = "ABC";
 	cout << "Possible Permutations Are: ";
 	permute(s, 0);
