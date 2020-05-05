@@ -87,6 +87,9 @@ int main() {
 	stk.push('a');
 	stk.push('b');
 	stk.push('c');
+	stk.push('d');
+	stk.push('e');
+	stk.push('e');
 	stk.Display();
 	auto res = stk.pop();
 
