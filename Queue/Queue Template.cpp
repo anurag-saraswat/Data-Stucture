@@ -84,7 +84,6 @@ public:
 		delete temp;
 		cout << "Element Dequeued is: " << data << endl;
 		return;
-
 	}
 };
 
