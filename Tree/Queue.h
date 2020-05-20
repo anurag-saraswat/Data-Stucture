@@ -49,6 +49,7 @@ public:
 		temp->key = data;
 		rear->next = temp;
 		rear = rear->next;
+		return;
 	}
 
 	void Display() {
@@ -76,15 +77,21 @@ public:
 
 	TNode<T>* dequeue() {
 
-		if (front == rear) {
+		if (front == NULL and rear == NULL) {
 			cout << "Queue is empty..Nothing to be dequeued" << endl;
 			return NULL;
 		}
+
 
 		Node<T> *temp = front;
 		TNode<T>* data = front->key;
 		front = front->next;
 		delete temp;
+
+		if (front == NULL) {
+			rear = NULL;
+		}
+
 		return data;
 	}
 
