@@ -18,7 +18,7 @@ public:
 
 		TNode<T> *temp1 = new TNode<T>();
 		temp1->left = temp1->right = NULL;
-		cout << "Enter Value Of Node: ";
+		cout << "Enter Value Of Root Node: ";
 		cin >> temp1->key;
 		root = temp1;
 
@@ -105,6 +105,36 @@ public:
 			}
 		}
 	}
+
+	int countingLeafNode() {
+
+		if (root == NULL)return 0;
+
+		int count = 0;
+
+		Queue<char> que;
+		que.enqueue(root);
+
+		TNode<char> *temp;
+
+		while (!que.isEmpty()) {
+
+			temp = que.dequeue();
+
+			if (temp->left == NULL and temp->right == NULL) {
+				count++;
+			}
+
+			if (temp->left) {
+				que.enqueue(temp->left);
+			}
+
+			if (temp->right) {
+				que.enqueue(temp->right);
+			}
+		}
+		return count;
+	}
 };
 
 int main() {
@@ -125,6 +155,8 @@ int main() {
 	cout << endl << "Level Order Traversal of Tree is: ";
 	btree.levelorder();
 
-	cout << endl;
+	int count = btree.countingLeafNode();
+	cout << endl << "Number Of Child Nodes are: " << count << endl;
+
 	return 0;
 }
