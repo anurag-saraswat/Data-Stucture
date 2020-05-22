@@ -88,7 +88,6 @@ int Height(struct Node *t) {
 	return 1 + max(Height(t->rchild), Height(t->lchild));
 }
 
-
 struct Node* InSucc(struct Node* t) {
 
 	if (t->rchild == NULL) {
@@ -115,23 +114,143 @@ struct Node* InPred(struct Node* t) {
 	return t;
 }
 
+void Delete(int data) {
 
+	struct Node* t = root, *parent, *q , *qparent;
+
+	while (t != NULL) {
+
+		if (data == t->key) break;
+
+		else if (data > t->key)  {
+			parent = t;
+			t = t->rchild;
+		}
+
+		else if (data < t->key) {
+			parent = t;
+			t = t->lchild;
+
+		}
+
+	}
+
+	if (t == NULL) {
+		cout << endl << "Element " << data << " is not present in tree. So not deleted!!! ";
+		return;
+	}
+
+	if (t->lchild == NULL and t->rchild == NULL) {
+		if (t->key > parent->key)parent->rchild = NULL;
+		else parent->lchild = NULL;
+
+		return;
+	}
+
+	int x = Height(t->rchild);
+	int y = Height(t->lchild);
+
+
+
+	if (y >= x) {
+
+		q = t;
+		qparent = t;
+		q = q->lchild;
+
+		if (q->rchild == NULL) {
+			t->key = q->key;
+			t->lchild = q->lchild;
+			free(q);
+			return;
+
+		}
+
+		while (q != NULL and q->rchild != NULL) {
+			qparent = q;
+			q = q->rchild;
+		}
+
+		t->key = q->key;
+
+		if (q->lchild != NULL) {
+			qparent->rchild = q->lchild;
+		}
+		else {
+			qparent->rchild = NULL;
+		}
+
+		free(q);
+
+		return;
+
+	}
+
+	else {
+
+		q = t;
+		qparent = t;
+		q = q->rchild;
+
+		if (q->lchild == NULL) {
+			t->key = q->key;
+			t->rchild = NULL;
+			free(q);
+			return;
+
+		}
+
+		while (q != NULL and q->lchild != NULL) {
+			qparent = q;
+			q = q->lchild;
+		}
+
+		t->key = q->key;
+
+		if (q->rchild != NULL) {
+			qparent->lchild = q->rchild;
+		}
+		else {
+			qparent->lchild = NULL;
+		}
+
+		free(q);
+
+		return;
+
+	}
+}
 
 
 int main() {
 
 	Insert(25);
 	Insert(18);
+	Insert(14);
 	Insert(20);
 	Insert(36);
 	Insert(28);
 	Insert(17);
-	Insert(16);
-
+	Insert(13);
+	Insert(15);
+	Insert(40);
+	Insert(45);
+	Insert(38);
+	Insert(37);
 
 
 	cout << "Inorder Traversal Of Tree is: ";
 	Inorder(root);
+
+	Delete(37);
+	Delete(25);
+	Delete(100);
+
+	cout << endl << "Inorder Traversal Of Tree After Deletion: ";
+	Inorder(root);
+
+
+
 
 	cout << endl << "PostOrder Traversal Of Tree is: ";
 	PostOrder(root);
@@ -156,6 +275,7 @@ int main() {
 	if (temp != NULL) {
 		cout << "Inorder Predecessor of " << x << " is: " << temp->key << endl;
 	}
+
 
 	return 0;
 }
