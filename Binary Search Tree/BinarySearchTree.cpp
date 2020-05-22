@@ -1,5 +1,14 @@
 #include "iostream"
 using namespace std;
+#include<algorithm>
+
+void Insert(int data);
+void Inorder(struct Node *p);
+struct Node* Search(int data);
+int Height(struct Node *t);
+struct Node* InSucc(struct Node* t);
+struct Node* InPred(struct Node* t);
+
 
 struct Node {
 	Node *lchild;
@@ -42,15 +51,21 @@ void Insert(int data) {
 	return;
 }
 
-void inorder(Node *p) {
+void Inorder(struct Node *p) {
 
 	if (p) {
-		inorder(p->lchild);
+		Inorder(p->lchild);
 		cout << p->key << " ";
-		inorder(p->rchild);
-
+		Inorder(p->rchild);
 	}
+}
 
+void PostOrder(struct Node *p) {
+	if (p) {
+		PostOrder(p->lchild);
+		PostOrder(p->rchild);
+		cout << p->key << " ";
+	}
 }
 
 struct Node* Search(int data) {
@@ -65,7 +80,39 @@ struct Node* Search(int data) {
 	}
 
 	return NULL;
+}
 
+int Height(struct Node *t) {
+
+	if (t == NULL) return 0;
+	return 1 + max(Height(t->rchild), Height(t->lchild));
+}
+
+
+struct Node* InSucc(struct Node* t) {
+
+	if (t->rchild == NULL) {
+		return NULL;
+	}
+
+	t = t->rchild;
+	while (t != NULL and t->lchild != NULL) {
+		t = t->lchild;
+	}
+	return t;
+}
+
+struct Node* InPred(struct Node* t) {
+
+	if (t->lchild == NULL) {
+		return NULL;
+	}
+
+	t = t->lchild;
+	while (t != NULL and t->rchild != NULL) {
+		t = t->rchild;
+	}
+	return t;
 }
 
 
@@ -73,26 +120,42 @@ struct Node* Search(int data) {
 
 int main() {
 
-	Insert(10);
+	Insert(25);
+	Insert(18);
 	Insert(20);
-	Insert(30);
-	Insert(5);
-	Insert(15);
-	Insert(13);
+	Insert(36);
+	Insert(28);
+	Insert(17);
+	Insert(16);
+
+
 
 	cout << "Inorder Traversal Of Tree is: ";
-	inorder(root);
+	Inorder(root);
+
+	cout << endl << "PostOrder Traversal Of Tree is: ";
+	PostOrder(root);
 
 	cout << endl;
 
-	struct Node *t = Search(5);
-	if (t)cout << "element " << t->key << " is Found!!" << endl;
+	cout << "Height of tree is: " << Height(root) << endl;
+
+	int x = 18;
+	struct Node *t = Search(x);
+	if (t)cout << "Element " << t->key << " is Found!!" << endl;
 	else cout << "Element is not found" << endl;
 
-	t = Search(100);
-	if (t)cout << "element " << t->key << " is Found!!" << endl;
-	else cout << "Element is not found" << endl;
+	struct Node *temp = InSucc(t);
 
+	if (temp != NULL) {
+		cout << "Inorder Succeor of " << x << " is: " << temp->key << endl;
+	}
+
+	temp = InPred(t);
+
+	if (temp != NULL) {
+		cout << "Inorder Predecessor of " << x << " is: " << temp->key << endl;
+	}
 
 	return 0;
 }
