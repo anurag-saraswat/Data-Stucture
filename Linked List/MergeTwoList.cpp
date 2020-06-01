@@ -90,13 +90,13 @@ void Merge() {
 
 int main() {
 
-	int size = 10;
-	int arr1[] = {1, 2, 3, 10, 20, 30, 45, 50, 70, 78};
+	int size = 4;
+	int arr1[] = {5, 10, 15, 40};
 	first = Create(arr1, size);
 	Display(first);
 
-	size = 10;
-	int arr2[] = {10, 15, 25, 30, 42, 55, 66, 68, 82, 90};
+	size = 3;
+	int arr2[] = {2, 3, 20};
 	second = Create(arr2, size);
 	Display(second);
 	Merge();
