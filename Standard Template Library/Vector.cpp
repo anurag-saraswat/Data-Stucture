@@ -95,15 +95,5 @@ int main() {
 		t.push_back(j++);
 	}
 
-
-
-
-
-
-
-
-
-
-
 	return 0;
 }
