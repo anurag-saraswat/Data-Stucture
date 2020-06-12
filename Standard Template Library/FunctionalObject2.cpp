@@ -24,6 +24,8 @@ public:
 
 	bool operator ()(Person a, Person b) {
 
+		cout << "Comparing " << a.age << " with" << b.age << "..." << endl;
+
 		return a.age > b.age;
 
 	}
@@ -43,9 +45,6 @@ int main() {
 
 		cin >> name >> age;
 		Person p(name, age);
-
-		//cout << name << " " << age << endl;
-
 		pq.push(p);
 	}
 
