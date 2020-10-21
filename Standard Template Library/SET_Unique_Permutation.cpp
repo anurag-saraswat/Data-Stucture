@@ -4,7 +4,6 @@
 
 using namespace std;
 
-;
 
 
 void permute(string a, int i , set<string> &s ) {
